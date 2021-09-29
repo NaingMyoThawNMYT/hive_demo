@@ -8,12 +8,10 @@ class HiveMyUserCtrl {
 
   static List<MyUser> get _myUsers => _box.values.toList().cast<MyUser>();
 
-  static Future<void> add(
-     final String name
-  ) async {
+  static Future<void> add(final String name) async {
     // if there is no old record then add as a new record
     final myUser = MyUser()
-      ..id = _myUsers.length + 1
+      ..id = _myUsers.isNotEmpty ? _myUsers.last.id + 1 : 1
       ..name = name
       ..createdDate = DateTime.now();
 
