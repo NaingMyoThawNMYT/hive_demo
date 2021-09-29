@@ -49,6 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
     await HiveMyUserCtrl.add('name');
   }
 
+  Future<void> _deleteUser(int id) async {
+    await HiveMyUserCtrl.delete(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, box, child) => ListView.builder(
           itemCount: box.values.length,
           itemBuilder: (context, index) => ListTile(
+            onLongPress: () => _deleteUser(box.values.elementAt(index).id),
             title: Text(
               box.values.elementAt(index).name,
             ),
