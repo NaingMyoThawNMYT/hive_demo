@@ -49,6 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
     await HiveMyUserCtrl.add('name');
   }
 
+  Future<void> _updateUser(final myUserFromBox) async {
+    myUserFromBox.name = myUserFromBox.name + ' name';
+
+    await HiveMyUserCtrl.update(myUserFromBox);
+  }
+
   Future<void> _deleteUser(int id) async {
     await HiveMyUserCtrl.delete(id);
   }
@@ -65,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
           itemCount: box.values.length,
           itemBuilder: (context, index) => ListTile(
             onLongPress: () => _deleteUser(box.values.elementAt(index).id),
+            onTap: () => _updateUser(box.values.elementAt(index)),
             title: Text(
               box.values.elementAt(index).name,
             ),

@@ -20,6 +20,12 @@ class HiveMyUserCtrl {
     return;
   }
 
+  static Future<void> update(MyUser myUserFromBox) async {
+    myUserFromBox.save();
+
+    return;
+  }
+
   static Future<void> delete(final int id) async {
     MyUser? myUser;
 
